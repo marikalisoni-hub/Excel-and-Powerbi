@@ -35,9 +35,9 @@ A single-screen executive view:
 
 ---
 
-## Key assumptions (illustrative and editable)
+## Key assumptions (editable)
 
-Discount rate 8% · long-run growth 1.5% · corporation tax 25% · central overhead 5% of sales · working capital 8% of sales · maintenance capex ~2% of sales · appraisal horizon 15 years (≈ a typical retail lease term).
+Discount rate 8% · long-run growth 1.5% · corporation tax 25% · central overhead 5% of sales · working capital 8% of sales · maintenance capex ~2% of sales · appraisal horizon 15 years 
 ---
 
 
@@ -46,7 +46,3 @@ Discount rate 8% · long-run growth 1.5% · corporation tax 25% · central overh
 
 ---
 
-## How to use
-
-- **Excel:** open the file and edit the blue assumption cells to re-appraise the whole estate; see the *Documentation & Sources* tab for definitions and benchmark references.
-- **Power BI:** open the `.pbix` in Power BI Desktop (free), or simply view `dashboard.png`.

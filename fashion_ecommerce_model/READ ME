@@ -1,0 +1,54 @@
+# Fashion E-Commerce — Sell-Through & Assortment Model
+
+Turning weekly sales and stock data into buying decisions: **what to reorder, what to mark down, and where sales are being lost to stock-outs.**
+
+Built twice — as a formula-driven **Excel** model and as a **Power BI** semantic model — on the same dataset, with the same logic.
+
+**All data is synthetic.** No real company data is used and the sales channels are anonymised. Parameters are benchmarked against published fashion-retail sources (see *Benchmarks* below).
+
+---
+
+## The question
+
+1. **What's selling faster than we planned?** → reorder it before it runs out.
+2. **What's selling slower than we planned?** → mark it down before the season ends.
+3. **What did we run out of too early?** → those lost sales never appear in any report.
+
+
+## What it calculates
+
+- **Sell-through %** — units sold ÷ units received
+- **Weeks of cover** — how long remaining stock lasts at current selling speed
+- **Velocity** — weekly selling rate (switches to the in-stock rate when a stock-out has corrupted recent sales)
+- **Missed sales** — for SKUs that sold out early, estimated at the planned run-rate × weeks out of stock
+- **Recommended action** — Reorder · Reorder (recover lost sales) · Markdown · Maintain, with a **sized** reorder quantity
+
+Decision rules combine a *performance* signal with a *volume* signal — a slow seller you have five units of isn't a problem worth acting on.
+
+
+## Excel model
+
+`Fashion_ECommerce_SellThrough_Assortment_Model.xlsx`
+
+**Structure** — a star schema:
+
+| Sheet | What it is |
+|---|---|
+| `Dim_Product` | Product dimension, one row per SKU |
+| `Fact_Weekly` | Fact table, one row per Week × SKU × Channel |
+| `Assumptions` | Every decision threshold, editable |
+| `Analysis` | The engine — one row per SKU × channel, all live formulas |
+| `Dashboard` | KPIs, category chart, quadrant scatter |
+| `Actions` | Slicer-driven PivotTable of recommended actions |
+
+## Limitations
+
+- **No size dimension.** Real assortment planning goes to size level; this stops at style × colour.
+- **No margin or cost of goods.** Everything is at list price, so the model flags *that* a markdown is needed, not how deep it should be.
+- **No returns.** Fashion return rates are high and category-dependent; ignoring them overstates true sell-through.
+- **Missed sales are an estimate** calculated on the conservative planned run-rate, not the observed live selling rate (which would have roughly tripled the figure).
+- **Diagnostic, not predictive.** No forecasting.
+
+---
+
+**Tools:** Excel (formula-driven modelling, PivotTables, slicers) · Power BI · DAX · star-schema data modelling
